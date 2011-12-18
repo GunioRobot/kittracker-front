@@ -14,6 +14,6 @@ production:
   adapter: mysql2
   database: kittracker
   username: root
-  password: rhokatlanta 
+  password: rhokatlanta
   host: localhost
   encoding: utf8

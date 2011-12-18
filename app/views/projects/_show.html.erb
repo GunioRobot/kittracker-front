@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <script type="text/javascript">
-    
+
     var Statuses = <%= (Package::STATUSES).to_json.html_safe %>;
     var orgs = <%= (Organization.all.map {|o| {o.id => o.name}}).reduce {|a,b| a.merge(b)}.to_json.html_safe %>;
     var projs = <%= (Project.all.map {|p| {p.id => p.name}}).reduce {|a,b| a.merge(b)}.to_json.html_safe %>;
@@ -15,7 +15,7 @@
 
 <ul>
     <% @project.postings.each do |post| %>
-       <li><%= post.person.name %> (<%= post.person.phone_number %>) at <%= post.lat%>,<%= post.lng%></li> 
+       <li><%= post.person.name %> (<%= post.person.phone_number %>) at <%= post.lat%>,<%= post.lng%></li>
     <% end %>
     <%= form_tag("/organizations/#{@organization.id}/projects/#{@project.id}/add_person",:method => :post) %>
         <div>
@@ -36,7 +36,7 @@
 
 <ul>
     <% @project.packages.each do |package| %>
-       <li><%= package.identifier %></li> 
+       <li><%= package.identifier %></li>
     <% end %>
     <%= form_tag("/organizations/#{@organization.id}/projects/#{@project.id}/add_package",:method => :post) %>
          <div>

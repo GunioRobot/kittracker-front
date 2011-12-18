@@ -61,7 +61,7 @@ $.each(pkgz,function(index,pckg){
              {dispName:"Organization",id:"orgFilter",array:orgs,filterObj:"orgID"},
              {dispName:"Project",id:"projFilter",array:projs,filterObj:"projID"}];
         var markers= new Array();
-        
+
 
         function Marker (marker, infoWindow,pkg){
             this.marker=marker;
@@ -72,7 +72,7 @@ $.each(pkgz,function(index,pckg){
             }
             this.pkg=pkg;
         }
-        
+
         $(document).ready(function() {
             var mLatlng = new google.maps.LatLng(10,0);
             var myOptions = {
@@ -110,14 +110,14 @@ $.each(pkgz,function(index,pckg){
                 });
                 $('.slide-out-div table').append("</select></td><tr>");
                 $("#"+filter.id).data("filterObj",filter.filterObj);
-                
+
                 $("#"+filter.id).change(function(event){
                      filterResults();
                 });
             });
            $('.slide-out-div').append("<div><span id='allFilter'>Show All</span></div>");
         }
-        
+
         function filterResults(){
             showAll();
             selectFilters();
@@ -125,7 +125,7 @@ $.each(pkgz,function(index,pckg){
             handleRecDateSearch();
             return false;
         }
-        
+
         function selectFilters(){
             $(".filterOption").each(function(index, element){
                 $.each(markers,function(index, marker){
@@ -140,7 +140,7 @@ $.each(pkgz,function(index,pckg){
                 });
             });
         }
-        
+
         function showAll(){
             $.each(markers,function(index, marker){
                 marker.setVisible(true);
@@ -151,13 +151,13 @@ $.each(pkgz,function(index,pckg){
                 showAll();
              });
         }
-        
+
         function createFilterTab(){
             $('.slide-out-div').tabSlideOut({
                 tabHandle: '.handle',                              //class of the element that will be your tab
                 pathToTabImage: '/images/contact_tab.gif',          //path to the image for the tab *required*
                 imageHeight: '122px',                               //height of tab image *required*
-                imageWidth: '40px',                               //width of tab image *required*    
+                imageWidth: '40px',                               //width of tab image *required*
                 tabLocation: 'right',                               //side of screen where tab lives, top, right, bottom, or left
                 speed: 300,                                        //speed of animation
                 action: 'click',                                   //options: 'click' or 'hover', action to trigger animation
@@ -171,11 +171,11 @@ $.each(pkgz,function(index,pckg){
                // var curPkg=pkgs[i];
 		console.log(curPkg);
                 var marker = new google.maps.Marker({
-                    position: curPkg.location, 
+                    position: curPkg.location,
                     map: map,
                     icon: getIcon(curPkg),
                     visible: true,
-                });                
+                });
                 var infoWindow = new google.maps.InfoWindow({
                     content: getContent(curPkg)
                 });
@@ -183,22 +183,22 @@ $.each(pkgz,function(index,pckg){
                 markers.push(new Marker(marker, infoWindow,curPkg));
             });
         }
-        
+
         function addWindow(mark, iW){
             google.maps.event.addListener(mark, 'click', function(event) {
                     //open the window corresponding to the marker that was just clicked
                     iW.open(map,mark);
                 });
         }
-        
+
         function getIcon(pkg){
             return icons[pkg.stat];
         }
-        
+
         function getContent(pkg){
             return "package id: "+ pkg.pkgID+"<br> Org Name: "+orgs[pkg.orgID]+"Status<br> "+statuses[pkg.stat]+"<br> "+projs[pkg.projID]+ "<br>sent: "+pkg.sendDate+"<br> received: "+pkg.recDate;l
         }
-        
+
         function handleSearch(){
             showAll();
             $.each(markers,function(index, marker){
@@ -209,14 +209,14 @@ $.each(pkgz,function(index,pckg){
             selectFilters();
             return false;
         }
-        
-        
+
+
         function handleSendDateSearch(){
             if($("#sendDate2").val()=="" || $("#sendDate1").val()=="")
                 return;
             var lastDate=new Date($("#sendDate2").val());
             var firstDate= new Date($("#sendDate1").val());
-            
+
              $.each(markers,function(index, marker){
                 console.log(marker.pkg.sendDate);
                 if(marker.pkg.sendDate>lastDate || marker.pkg.sendDate<firstDate) {
@@ -249,14 +249,14 @@ $.each(pkgz,function(index,pckg){
                 <tr>
                     <td>Sent Between:</td>
                     <td>
-                        <input id="sendDate1" class="datePicker" type='text' name='sendDate1' size="10"/> and 
+                        <input id="sendDate1" class="datePicker" type='text' name='sendDate1' size="10"/> and
                         <input id="sendDate2" class="datePicker" type='text' name='sendDate2' size="10"/>
                     </td>
-                </tr> 
+                </tr>
                 <tr>
                     <td>Received Between:</td>
                     <td>
-                        <input id="recDate1" class="datePicker" type='text' name='recDate1' size="10"/> and 
+                        <input id="recDate1" class="datePicker" type='text' name='recDate1' size="10"/> and
                         <input id="recDate2" class="datePicker" type='text' name='recDate2' size="10"/>
                     </td>
                 </tr>

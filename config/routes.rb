@@ -11,9 +11,9 @@ KittrackFront::Application.routes.draw do
     end
     resources :people
   end
-  
+
   resources :people
-  
+
   root :to => "organizations#index"
 
   # The priority is based upon order of creation:
